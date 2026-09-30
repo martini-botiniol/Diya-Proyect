@@ -1,4 +1,4 @@
-# 3SD 0.2
+# Diya Proyect 0.2
 
 Aplicación Windows que convierte SSD extraíbles en cartuchos portátiles para Steam.
 Conecta un cartucho: 3SD lo valida, lo registra localmente y solicita a Steam abrir
