@@ -5,7 +5,7 @@ from unittest.mock import patch
 
 import pytest
 
-SPEC = importlib.util.spec_from_file_location('prepare_3sd', Path(__file__).resolve().parents[2] / 'scripts' / 'prepare_3sd.py')
+SPEC = importlib.util.spec_from_file_location('prepare_diya_proyect', Path(__file__).resolve().parents[2] / 'scripts' / 'prepare_diya_proyect.py')
 prepare = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(prepare)
 
@@ -15,11 +15,11 @@ def test_failed_dependency_install_leaves_active_environment_untouched(tmp_path)
     root.mkdir()
     manifest = root / 'installation.json'
     manifest.write_text('{"runtime": "old"}')
-    launcher = root / 'Abrir-3SD.bat'
+    launcher = root / 'Abrir-Diya-Proyect.bat'
     launcher.write_text('old launcher')
     source = tmp_path / 'zip'
     (source / 'wheelhouse').mkdir(parents=True)
-    (source / 'wheelhouse' / '3sd-0.1.0-py3-none-any.whl').touch()
+    (source / 'wheelhouse' / 'diya_proyect-0.1.0-py3-none-any.whl').touch()
     with patch('tkinter.Tcl'), patch.object(prepare.venv.EnvBuilder, 'create'), patch.object(prepare, 'run', side_effect=RuntimeError('download failed')):
         with pytest.raises(RuntimeError, match='download failed'):
             prepare.prepare(root, source)
@@ -32,7 +32,7 @@ def test_failed_dependency_install_leaves_active_environment_untouched(tmp_path)
 def test_checks_finish_before_publication(tmp_path):
     source = tmp_path / 'zip'
     (source / 'wheelhouse').mkdir(parents=True)
-    (source / 'wheelhouse' / '3sd-0.1.0-py3-none-any.whl').touch()
+    (source / 'wheelhouse' / 'diya_proyect-0.1.0-py3-none-any.whl').touch()
     with patch('tkinter.Tcl'), patch.object(prepare.venv.EnvBuilder, 'create'), patch.object(prepare, 'run') as run:
         prepare.prepare(tmp_path / 'install with spaces', source)
     commands = [call.args[0] for call in run.call_args_list]

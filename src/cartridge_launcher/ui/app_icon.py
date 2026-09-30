@@ -3,7 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 
 
-APP_ICON_RELATIVE_PATHS = (Path("assets") / "3SD.ico",)
+APP_ICON_RELATIVE_PATHS = (Path("assets") / "DiyaProyect.ico",)
 
 
 def appIconPath() -> Path | None:

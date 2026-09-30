@@ -1,19 +1,19 @@
-# Manual de 3SD 0.2
+# Manual de Diya Proyect 0.2
 
 ## Experiencia de uso
 
-El flujo es `SSD → 3SD → Steam → Juego`. 3SD debe permanecer abierto en la bandeja.
+El flujo es `SSD → Diya Proyect → Steam → Juego`. Diya Proyect debe permanecer abierto en la bandeja.
 Cerrar la biblioteca conserva la bandeja; Salir termina la aplicación.
 El modo por defecto es automático. Un juego instalado en la biblioteca del SSD
 se abre mediante Steam; una instalación ausente o incompleta se deriva a Steam.
 Una cuenta sin licencia, una sesión cerrada o una descarga pendiente puede requerir
-intervención dentro de Steam: 3SD no elude esas condiciones.
+intervención dentro de Steam: Diya Proyect no elude esas condiciones.
 
 La primera vez que Steam ve una biblioteca en una PC puede ser necesario añadir
-`X:\SteamLibrary` en Parámetros > Almacenamiento. 3SD muestra la ruta concreta y
+`X:\SteamLibrary` en Parámetros > Almacenamiento. Diya Proyect muestra la ruta concreta y
 no edita `libraryfolders.vdf` ni fuerza silenciosamente el destino de instalación.
 El procedimiento se basa en la [ayuda de Steam](https://help.steampowered.com/en/faqs/view/4578-18A7-C819-8620).
-Si el mismo AppID existe en varias bibliotecas, 3SD comprueba el SSD, pero Steam
+Si el mismo AppID existe en varias bibliotecas, Diya Proyect comprueba el SSD, pero Steam
 conserva la elección final de la instalación que ejecuta. La confirmación se busca
 en la biblioteca del cartucho; revisa Steam si el inicio no se confirma.
 
@@ -22,7 +22,7 @@ en la biblioteca del cartucho; revisa Steam si el inicio no se confirma.
 En **Opciones de cartucho**, abre **Crear cartucho** o **Actualizar cartucho**.
 En el formulario, selecciona primero el disco y busca el juego o introduce su nombre y AppID.
 Crear genera un cartucho V2. Actualizar conserva UUID y fecha de creación y cambia
-el juego; puede hacerse desde cualquier PC con 3SD compatible.
+el juego; puede hacerse desde cualquier PC con Diya Proyect compatible.
 
 Un V1 válido en su PC puede seguir utilizándose. Para compartirlo, abre
 **Reparar cartucho > Preparar para usar en cualquier PC** y selecciona el SSD.
@@ -32,16 +32,16 @@ localmente. Se validan los campos y se guardan `manifest.json.v1.bak` y
 `signature.sig.v1.bak`, cuando exista firma. Una conexión nunca convierte el SSD.
 
 ```powershell
-3sd create --root G:\ --display-name "Juego" --app-id 111
-3sd update --root G:\ --display-name "Otro juego" --app-id 222
-3sd convert --root G:\
-3sd repair --root G:\ --display-name "Juego" --app-id 111
+diya-proyect create --root G:\ --display-name "Juego" --app-id 111
+diya-proyect update --root G:\ --display-name "Otro juego" --app-id 222
+diya-proyect convert --root G:\
+diya-proyect repair --root G:\ --display-name "Juego" --app-id 111
 ```
 
 Reparar es una acción explícita para metadata dañada. Conserva una copia del
 manifiesto anterior y desactiva metadata ejecutable conservando copia `.disabled`.
 No modifica los archivos del juego. Si la versión o la clave pertenecen a una
-versión desconocida, actualiza 3SD: no se permite sobrescribirla como reparación.
+versión desconocida, actualiza Diya Proyect: no se permite sobrescribirla como reparación.
 Un error de registro posterior al guardado no invalida el manifiesto: tras recuperar
 el registro, vuelve a conectar o escanear para registrarlo.
 
@@ -79,7 +79,7 @@ La API utilizada sigue la [documentación AESGCM](https://cryptography.io/en/lat
 No se genera una clave común nueva al instalar o compilar. Cualquier rotación
 futura debe conservar lectura de los `keyId` anteriores. El nonce sí cambia en
 cada escritura. No se necesita una clave privada del usuario ni una PC de origen.
-La clave común está distribuida con 3SD y puede extraerse: identifica compatibilidad
+La clave común está distribuida con Diya Proyect y puede extraerse: identifica compatibilidad
 e integridad, no demuestra emisión oficial frente a una falsificación deliberada.
 
 V2 sin autorización o con autenticación fallida se rechaza, aunque exista una
@@ -106,10 +106,10 @@ revalida el cartucho y la presencia del dispositivo antes de enviar una acción.
 Los mensajes distinguen validación, solicitud enviada, juego iniciado, inicio no
 confirmado y necesidad de instalación/configuración. La confirmación usa procesos
 bajo el directorio del juego o una actualización reciente de `LastPlayed`; es una
-observación heurística, no una sesión de juego controlada por 3SD.
+observación heurística, no una sesión de juego controlada por Diya Proyect.
 
 Antes de desconectar el SSD, termina juegos y descargas que lo utilicen. Retirar
-un disco mientras se escribe puede dañar datos. 3SD cancela sus tareas pendientes,
+un disco mientras se escribe puede dañar datos. Diya Proyect cancela sus tareas pendientes,
 pero no expulsa físicamente el volumen ni termina procesos del juego a la fuerza.
 
 ## Persistencia y recuperación
@@ -133,19 +133,19 @@ o corrupción del sistema de archivos. Tras reconectar, repite la operación exp
 ## Instalación y distribución
 
 El paquete autónomo incluye Python, Tcl/Tk y dependencias. Extrae el ZIP completo y
-abre `3SD.exe` o `Instalar-3SD.bat`. Instala generaciones en
-`%LOCALAPPDATA%\Programs\3SD\packages`, comprueba el ejecutable antes de activar
+abre `DiyaProyect.exe` o `Instalar-Diya-Proyect.bat`. Instala generaciones en
+`%LOCALAPPDATA%\Programs\DiyaProyect\packages`, comprueba el ejecutable antes de activar
 accesos directos y conserva la generación anterior. No importa certificados ni
 cambia políticas de Windows. Una firma comercial pública queda fuera de este build.
 
 En instalaciones nuevas se activa inicio con Windows; las actualizaciones conservan
 la preferencia existente. Cierra la bandeja antes de empezar a usar una actualización.
 La desinstalación retira accesos e inicio automático; por estar el ejecutable en uso,
-se pide cerrar 3SD y eliminar la carpeta de instalación. Los datos `.3sd` y SSD se
+se pide cerrar Diya Proyect y eliminar la carpeta de instalación. Los datos `.3sd` y SSD se
 conservan. No se eliminan instalaciones Python anteriores de forma automática.
 
-La alternativa Python mantiene `Preparar-3SD.bat`, `Abrir-3SD.bat` y
-`Diagnosticar-3SD.bat`. Requiere Python 3.11+ con Tcl/Tk, pip y venv e internet
+La alternativa Python mantiene `Preparar-Diya-Proyect.bat`, `Abrir-Diya-Proyect.bat` y
+`Diagnosticar-Diya-Proyect.bat`. Requiere Python 3.11+ con Tcl/Tk, pip y venv e internet
 para preparar. No depende de una instalación editable ni del checkout una vez
 publicada. Los entornos anteriores se conservan para recuperación.
 
@@ -153,11 +153,11 @@ publicada. Los entornos anteriores se conservan para recuperación.
 python -m pip install -e ".[dev,build]"
 python -m pytest
 python scripts/package_standalone.py
-python scripts/package_3sd.py
+python scripts/package_diya_proyect.py
 ```
 
 El constructor autónomo exige Tcl/Tk operativo, ejecuta pruebas y verifica
-`3SD.exe self-check` antes de generar el ZIP. El inventario de dependencias del
+`DiyaProyect.exe self-check` antes de generar el ZIP. El inventario de dependencias del
 build acompaña el paquete. Usar un entorno limpio evita dependencias accidentales.
 
 ## Arquitectura y validación

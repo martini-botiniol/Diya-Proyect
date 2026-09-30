@@ -76,7 +76,7 @@ class LauncherWindow:
         self.lastActivityKey: str | None = None
         self.lastStatusPopupKey: str | None = None
 
-        self.root.title("3SD")
+        self.root.title("Diya Proyect")
         self.root.geometry("1080x680")
         self.root.minsize(720, 480)
         self._applyWindowIcon()
@@ -474,7 +474,28 @@ class LauncherWindow:
             statusLabel = ttk.Label(frame, text=card.statusText, style=labelStyle, font=("Segoe UI", 9))
             statusLabel.grid(row=2, column=0, sticky="w", pady=(4, 0))
             statusLabel.bind("<Button-1>", lambda event, cartridgeId=card.cartridgeId: self._selectLibraryCard(cartridgeId))
+            deleteButton = ModernButton(frame, text="Eliminar cartucho", width=150,
+                background="#1f3a31" if card.isActive else "#20282f",
+                command=lambda cartridgeId=card.cartridgeId: self._deleteLibraryCard(cartridgeId))
+            deleteButton.grid(row=3, column=0, sticky="w", pady=(10, 0))
             frame.bind("<Button-1>", lambda event, cartridgeId=card.cartridgeId: self._selectLibraryCard(cartridgeId))
+
+    def _deleteLibraryCard(self, cartridgeId: str) -> None:
+        def work():
+            return self.registry.delete(cartridgeId)
+
+        def done(deleted):
+            self._refreshLibrary()
+            self.actionText.set("Cartucho eliminado de la biblioteca de Diya Proyect. Los archivos del SSD se conservan."
+                if deleted else "El cartucho ya no estaba en la biblioteca de Diya Proyect.")
+
+        def failed(exc):
+            self.actionText.set(exc.message if isinstance(exc, CartridgeError)
+                else "No se pudo eliminar el cartucho del registro. Vuelve a intentar.")
+            self.logger.warning("Eliminar cartucho del registro: %s", exc)
+
+        if self.tasks.submit(("delete-cartridge", cartridgeId), work, done, failed):
+            self.actionText.set("Eliminando cartucho de la biblioteca de Diya Proyect…")
 
     def _selectLibraryCard(self, cartridgeId: str) -> None:
         cartridge = self.registry.get(cartridgeId)
@@ -497,7 +518,7 @@ class LauncherWindow:
     def _openCartridgeDialog(self, operation):
         dialog = self.dialogController.open(operation)
         if dialog is None:
-            self.actionText.set("Ya hay una operación abierta en otra ventana de 3SD.")
+            self.actionText.set("Ya hay una operación abierta en otra ventana de Diya Proyect.")
         return dialog
 
     def _createCartridge(self):

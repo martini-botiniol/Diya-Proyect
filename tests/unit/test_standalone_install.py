@@ -10,8 +10,8 @@ from cartridge_launcher.infrastructure import standalone_install as installer
 def setup(tmp_path):
     source = tmp_path / "extracted"
     (source / "_internal").mkdir(parents=True)
-    (source / "3SD.exe").write_bytes(b"exe")
-    paths = tuple(tmp_path / name / "3SD.lnk" for name in ("desktop", "menu", "startup"))
+    (source / "DiyaProyect.exe").write_bytes(b"exe")
+    paths = tuple(tmp_path / name / "DiyaProyect.lnk" for name in ("desktop", "menu", "startup"))
     return tmp_path / "installed", source, paths
 
 
@@ -32,7 +32,7 @@ def test_standalone_update_preserves_disabled_startup_and_previous_package(setup
     assert Path(first).is_dir()
     assert not paths[2].exists()
     assert check.call_count == 2
-    assert json.loads(paths[0].read_text())[0] == str(Path(state["package"]) / "3SD.exe")
+    assert json.loads(paths[0].read_text())[0] == str(Path(state["package"]) / "DiyaProyect.exe")
 
 
 def test_standalone_failed_self_check_never_activates(setup):

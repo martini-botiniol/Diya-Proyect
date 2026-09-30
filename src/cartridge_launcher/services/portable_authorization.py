@@ -1,6 +1,6 @@
 """Offline recognition, not publisher attestation. Keep old keys when rotating.
 
-This key is distributed with 3SD: it is not a secret against a determined user.
+This key is distributed with Diya Proyect: it is not a secret against a determined user.
 Never generate a replacement key during a build or installation.
 """
 from __future__ import annotations
@@ -38,7 +38,7 @@ def verifyAuthorization(payload: dict) -> None:
     if not isinstance(auth, dict):
         raise CartridgeError(ErrorCode.INVALID_SIGNATURE, "Falta la autorizacion V2.")
     if type(auth.get("version")) is not int or auth["version"] != 1 or not isinstance(auth.get("keyId"), str) or auth["keyId"] not in KEYS:
-        raise CartridgeError(ErrorCode.UNSUPPORTED_AUTHORIZATION, "Actualiza 3SD para leer esta autorizacion.")
+        raise CartridgeError(ErrorCode.UNSUPPORTED_AUTHORIZATION, "Actualiza Diya Proyect para leer esta autorizacion.")
     try:
         nonce = base64.b64decode(auth["nonce"], validate=True)
         ciphertext = base64.b64decode(auth["ciphertext"], validate=True)

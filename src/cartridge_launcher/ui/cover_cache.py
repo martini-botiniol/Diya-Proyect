@@ -55,7 +55,7 @@ class CoverCache:
 
 def downloadCover(url: str, imagePath: Path) -> bool:
     try:
-        request = Request(url, headers={"User-Agent": "3SD/0.1"})
+        request = Request(url, headers={"User-Agent": "Diya Proyect/0.1"})
         with urlopen(request, timeout=10) as response:
             atomicWrite(imagePath, response.read())
         return True

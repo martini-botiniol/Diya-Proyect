@@ -9,7 +9,7 @@ from pathlib import Path
 def startupShortcutPath() -> Path:
     from win32com.shell import shell, shellcon
 
-    return Path(shell.SHGetFolderPath(0, shellcon.CSIDL_STARTUP, None, 0)) / "3SD.lnk"
+    return Path(shell.SHGetFolderPath(0, shellcon.CSIDL_STARTUP, None, 0)) / "DiyaProyect.lnk"
 
 
 def windowPython() -> Path:

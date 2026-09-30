@@ -35,7 +35,7 @@ class SecurityService:
             secret = secrets.token_bytes(32)
             if os.name == "nt":
                 import win32crypt
-                encrypted = win32crypt.CryptProtectData(secret, "3SD legacy HMAC", None, None, None, 0)
+                encrypted = win32crypt.CryptProtectData(secret, "Diya Proyect legacy HMAC", None, None, None, 0)
                 data = b"DPAPI:" + base64.b64encode(encrypted)
             else:
                 data = base64.b64encode(secret)

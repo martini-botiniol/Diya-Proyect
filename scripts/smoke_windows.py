@@ -1,4 +1,4 @@
-"""Opt-in desktop smoke test. Run with installed Python after exiting 3SD.
+"""Opt-in desktop smoke test. Run with installed Python after exiting Diya Proyect.
 
 Does not launch Steam or prepare/repair cartridges. Writes a JSON result.
 """
@@ -21,9 +21,9 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--report", required=True, type=Path)
     args = parser.parse_args()
-    lock = SingleInstanceLock(defaultDataDirectory() / "3sd.lock")
+    lock = SingleInstanceLock(defaultDataDirectory() / "diya_proyect.lock")
     if not lock.acquire():
-        raise RuntimeError("Cierra 3SD antes de la prueba de escritorio.")
+        raise RuntimeError("Cierra Diya Proyect antes de la prueba de escritorio.")
     results = {}
     security, registry, scanner, logger = services()
     app = TrayApp(security, registry, scanner, logger, steamAction="none")
@@ -57,7 +57,7 @@ def main() -> None:
     def closeLibrary():
         assert app.libraryProcess is not None and app.libraryProcess.poll() is None
         windows = []
-        win32gui.EnumWindows(lambda hwnd, _: windows.append(hwnd) if win32gui.GetWindowText(hwnd) == "3SD"
+        win32gui.EnumWindows(lambda hwnd, _: windows.append(hwnd) if win32gui.GetWindowText(hwnd) == "Diya Proyect"
                              and win32gui.IsWindowVisible(hwnd) else None, None)
         assert len(windows) == 1, f"Se esperaba una biblioteca visible; hay {len(windows)}"
         results["oneVisibleLibrary"] = True

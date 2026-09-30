@@ -18,7 +18,7 @@ def shortcutPaths() -> tuple[Path, Path, Path]:
     from win32com.shell import shell, shellcon
     desktop = Path(shell.SHGetFolderPath(0, shellcon.CSIDL_DESKTOPDIRECTORY, None, 0))
     programs = Path(shell.SHGetFolderPath(0, shellcon.CSIDL_PROGRAMS, None, 0))
-    return desktop / "3SD.lnk", programs / "3SD" / "3SD.lnk", startupShortcutPath()
+    return desktop / "DiyaProyect.lnk", programs / "DiyaProyect" / "DiyaProyect.lnk", startupShortcutPath()
 
 
 def publish(root: Path, runtime: Path, source: Path) -> None:
@@ -28,17 +28,17 @@ def publish(root: Path, runtime: Path, source: Path) -> None:
     manifest = root / "installation.json"
     previous = json.loads(manifest.read_text(encoding="utf-8")) if manifest.exists() else None
     desktop, menu, startup = shortcutPaths()
-    legacy = (root / "3SD.exe").exists() or desktop.exists() or menu.exists()
+    legacy = (root / "DiyaProyect.exe").exists() or desktop.exists() or menu.exists()
     enabled = startupWanted(previous is not None, legacy, startup.exists())
-    launcher = root / "Abrir-3SD.bat"
-    diagnostic = root / "Diagnosticar-3SD.bat"
+    launcher = root / "Abrir-Diya-Proyect.bat"
+    diagnostic = root / "Diagnosticar-Diya-Proyect.bat"
     cleanup = source / "scripts" / "cleanup_legacy.ps1"
     cleanupTarget = root / "cleanup_legacy.ps1"
     targets = [desktop, menu, startup, launcher, diagnostic, manifest, cleanupTarget]
     snapshot = {path: path.read_bytes() if path.exists() else None for path in targets}
     # Inventory stays outside user data and survives rollback for troubleshooting.
     (runtime / "migration-inventory.json").write_text(json.dumps({
-        "legacyExe": str(root / "3SD.exe"), "legacyExeExists": (root / "3SD.exe").exists(),
+        "legacyExe": str(root / "DiyaProyect.exe"), "legacyExeExists": (root / "DiyaProyect.exe").exists(),
         "shortcuts": {str(path): path.exists() for path in (desktop, menu, startup)},
         "startupEnabled": enabled, "previous": previous,
     }, indent=2), encoding="utf-8")
@@ -76,7 +76,7 @@ def publish(root: Path, runtime: Path, source: Path) -> None:
         raise
     print(f"Publicada: {runtime}. Inicio con Windows: {'activado' if enabled else 'desactivado'}")
     if previous or legacy:
-        print("Si 3SD estaba abierto, sal desde la bandeja y vuelve a abrirlo para usar la nueva version.")
+        print("Si Diya Proyect estaba abierto, sal desde la bandeja y vuelve a abrirlo para usar la nueva version.")
 
 
 if __name__ == "__main__":
