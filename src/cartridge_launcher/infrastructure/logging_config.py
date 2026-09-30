@@ -6,7 +6,7 @@ from pathlib import Path
 
 
 def configureLogging(logPath: Path | None = None) -> logging.Logger:
-    logger = logging.getLogger("3SD")
+    logger = logging.getLogger("Diya Proyect")
     logger.setLevel(logging.INFO)
     if logger.handlers:
         return logger

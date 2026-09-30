@@ -37,7 +37,7 @@ class LocalRegistry:
             return self._read(self.path)
         except (OSError, ValueError, TypeError) as exc:
             self.warning = "Registro dañado: se utiliza el respaldo cuando esta disponible."
-            logging.getLogger("3SD").warning(self.warning)
+            logging.getLogger("Diya Proyect").warning(self.warning)
             try:
                 return self._read(self.path.with_suffix(".json.bak"))
             except (OSError, ValueError, TypeError):

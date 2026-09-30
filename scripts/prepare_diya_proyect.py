@@ -33,24 +33,24 @@ def prepare(root: Path, source: Path) -> Path:
         try:
             msvcrt.locking(handle.fileno(), msvcrt.LK_NBLCK, 1)
         except OSError as exc:
-            raise RuntimeError("Otra preparacion de 3SD esta en curso.") from exc
+            raise RuntimeError("Otra preparacion de Diya Proyect esta en curso.") from exc
         candidate = root / "runtimes" / uuid.uuid4().hex
         candidate.mkdir(parents=True)
         try:
             print(f"Preparando entorno: {candidate}", flush=True)
             venv.EnvBuilder(with_pip=True).create(candidate)
             python = str(candidate / "Scripts" / "python.exe")
-            wheels = sorted((source / "wheelhouse").glob("3sd-*.whl"))
+            wheels = sorted((source / "wheelhouse").glob("diya_proyect-*.whl"))
             if not wheels:
                 if not (source / "pyproject.toml").is_file():
-                    raise RuntimeError("El ZIP no contiene la wheel de 3SD. Vuelve a extraerlo completo.")
+                    raise RuntimeError("El ZIP no contiene la wheel de Diya Proyect. Vuelve a extraerlo completo.")
                 run([python, "-m", "pip", "install", "setuptools==80.9.0", "wheel==0.45.1"])
                 wheelhouse = candidate / "wheelhouse"
                 run([python, "-m", "pip", "wheel", "--no-build-isolation", "--no-deps",
                      "--wheel-dir", str(wheelhouse), str(source)])
-                wheels = sorted(wheelhouse.glob("3sd-*.whl"))
+                wheels = sorted(wheelhouse.glob("diya_proyect-*.whl"))
             if len(wheels) != 1:
-                raise RuntimeError("Debe haber exactamente una wheel de 3SD.")
+                raise RuntimeError("Debe haber exactamente una wheel de Diya Proyect.")
             run([python, "-m", "pip", "install", str(wheels[0])])
             run([python, "-m", "pip", "check"])
             # Check from outside the checkout so source imports cannot hide packaging errors.
@@ -71,7 +71,7 @@ def prepare(root: Path, source: Path) -> Path:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--install-directory", type=Path,
-                        default=Path(os.environ.get("LOCALAPPDATA", str(Path.home()))) / "Programs" / "3SD")
+                        default=Path(os.environ.get("LOCALAPPDATA", str(Path.home()))) / "Programs" / "DiyaProyect")
     args = parser.parse_args()
     try:
         prepare(args.install_directory, Path(__file__).resolve().parent.parent)

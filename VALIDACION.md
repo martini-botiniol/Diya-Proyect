@@ -34,13 +34,13 @@ dentro de la carpeta instalada. Los informes generados no se versionan.
   un juego mediante Steam. La prueba automatizada de escritorio usa accion Steam
   `none` y no inicia juegos ni prepara/repara cartuchos.
 
-Para repetir la prueba de escritorio, cerrar primero 3SD y ejecutar con el
+Para repetir la prueba de escritorio, cerrar primero Diya Proyect y ejecutar con el
 `python.exe` del entorno instalado:
 
 ```powershell
 python -I scripts/smoke_windows.py --report resultado-escritorio.json
 ```
 
-Usar el Python instalado en 3SD, no un interprete sin el paquete instalado.
+Usar el Python instalado en Diya Proyect, no un interprete sin el paquete instalado.
 La prueba abre y cierra una biblioteca y termina el tray que ella misma creo.
 El criterio de exito es `success: true` en el informe.

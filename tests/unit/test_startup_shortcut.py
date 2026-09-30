@@ -24,7 +24,7 @@ def test_shortcut_uses_com_and_quotes_arguments(tmp_path):
 
 
 def test_failed_shortcut_is_not_replaced_with_text(tmp_path):
-    path = tmp_path / '3SD.lnk'
+    path = tmp_path / 'DiyaProyect.lnk'
     with patch.object(startup, 'startupShortcutPath', return_value=path), patch('win32com.client.Dispatch', side_effect=RuntimeError('COM failed')):
         with pytest.raises(RuntimeError, match='COM failed'):
             startup.enableStartup()
@@ -32,7 +32,7 @@ def test_failed_shortcut_is_not_replaced_with_text(tmp_path):
 
 
 def test_invalid_shortcut_is_not_enabled(tmp_path):
-    path = tmp_path / '3SD.lnk'
+    path = tmp_path / 'DiyaProyect.lnk'
     path.write_text('old broken shortcut')
     with patch.object(startup, 'startupShortcutPath', return_value=path), patch('win32com.client.Dispatch', side_effect=RuntimeError('COM failed')):
         assert not startup.isStartupEnabled()

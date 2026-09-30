@@ -7,10 +7,10 @@ import logging
 class BackgroundTasks:
     def __init__(self, root):
         self.root = root
-        self.pool = ThreadPoolExecutor(max_workers=2, thread_name_prefix="3sd-devices")
-        self.assetPool = ThreadPoolExecutor(max_workers=2, thread_name_prefix="3sd-covers")
-        self.searchPool = ThreadPoolExecutor(max_workers=1, thread_name_prefix="3sd-search")
-        self.actionPool = ThreadPoolExecutor(max_workers=1, thread_name_prefix="3sd-steam")
+        self.pool = ThreadPoolExecutor(max_workers=2, thread_name_prefix="diya_proyect-devices")
+        self.assetPool = ThreadPoolExecutor(max_workers=2, thread_name_prefix="diya_proyect-covers")
+        self.searchPool = ThreadPoolExecutor(max_workers=1, thread_name_prefix="diya_proyect-search")
+        self.actionPool = ThreadPoolExecutor(max_workers=1, thread_name_prefix="diya_proyect-steam")
         self.results = queue.Queue()
         self.closed = False
         self.pending = set()
@@ -39,7 +39,7 @@ class BackgroundTasks:
                 else:
                     done(value)
             except Exception:
-                logging.getLogger("3SD").exception("No se pudo actualizar la interfaz")
+                logging.getLogger("Diya Proyect").exception("No se pudo actualizar la interfaz")
         if not self.closed:
             self.root.after(50, self._drain)
 

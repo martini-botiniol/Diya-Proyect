@@ -73,7 +73,7 @@ class TrayApp:
         self.statusPopup: StatusPopup | None = None
         self.instanceSignal = SingleInstanceSignal()
         self.pystray = loadPystray()
-        self.icon = self.pystray.Icon("3sd", (iconFactory or createTrayIcon)(), "3SD", self._menu())
+        self.icon = self.pystray.Icon("diya_proyect", (iconFactory or createTrayIcon)(), "Diya Proyect", self._menu())
 
     def run(self) -> None:
         self.running = True
@@ -401,5 +401,5 @@ def loadPystray():
     try:
         import pystray
     except ModuleNotFoundError as exc:
-        raise RuntimeError("Falta pystray. Ejecuta Preparar-3SD.bat para reparar la instalacion.") from exc
+        raise RuntimeError("Falta pystray. Ejecuta Preparar-Diya-Proyect.bat para reparar la instalacion.") from exc
     return pystray

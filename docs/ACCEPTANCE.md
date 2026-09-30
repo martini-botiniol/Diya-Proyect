@@ -8,7 +8,7 @@
 | Actualización en B, regreso a A | Autorización válida y datos actualizados. |
 | V1 externo | Botón de conversión explícita; nunca convertir al conectar. |
 | V2 alterado, sin autorización o con token copiado | Rechazo sin fallback a V1. |
-| Versión o clave desconocida | Actualizar 3SD, sin reparación destructiva. |
+| Versión o clave desconocida | Actualizar Diya Proyect, sin reparación destructiva. |
 | Juego completo en biblioteca registrada | Solicitud de apertura y confirmación observada. |
 | Juego ausente o parcial | Solicitud de instalación/reanudación en Steam. |
 | Steam ausente | Mensaje para instalarlo; ninguna apertura de juego. |
@@ -27,6 +27,21 @@ archivos de bibliotecas. No se abren juegos ni se modifican discos reales.
 El build autónomo ejecuta `self-check` antes de producir el ZIP.
 
 ## Verificación física pendiente
+
+### Estado comunicado por el usuario (sesión del 9–10 de septiembre de 2026)
+
+- **Otra PC → esta PC:** el usuario confirma que funciona instalar el juego
+  desde otra PC y usar el cartucho en esta. Es un resultado reportado por el
+  usuario; no implica que todos los escenarios de portabilidad estén aprobados.
+- **Esta PC → otra PC:** pendiente de probar. No clasificar esta dirección como
+  fallida ni como aprobada hasta ejecutar la prueba.
+- **Posible fallo de reconocimiento en Steam:** causa aún desconocida y fallo
+  no confirmado para la dirección pendiente. No atribuirlo a `write.lock`, al
+  registro de la biblioteca o a archivos faltantes sin evidencia del escenario.
+  Las incidencias locales de escritura y estructura observadas anteriormente
+  no demuestran la causa de un problema de portabilidad entre equipos.
+
+### Escenarios restantes
 
 Estos puntos requieren dos PCs Windows y dos SSD con juegos reales; no se deben
 marcar aprobados solo por pasar las pruebas automatizadas:

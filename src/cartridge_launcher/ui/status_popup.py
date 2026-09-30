@@ -71,7 +71,7 @@ class StatusPopup:
     def _build(self) -> None:
         window = tk.Toplevel(self.root)
         self.window = window
-        window.title("3SD")
+        window.title("Diya Proyect")
         window.configure(bg="#1c2024")
         window.attributes("-topmost", True)
         window.resizable(False, False)

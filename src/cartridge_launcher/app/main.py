@@ -28,7 +28,7 @@ def defaultArgs() -> argparse.Namespace:
 
 
 def buildParser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(prog="3SD")
+    parser = argparse.ArgumentParser(prog="Diya Proyect")
     subparsers = parser.add_subparsers(dest="command")
     ui = subparsers.add_parser("ui")
     ui.add_argument("--from-tray", action="store_true", help=argparse.SUPPRESS)
@@ -46,7 +46,7 @@ def buildParser() -> argparse.ArgumentParser:
     for name in ("install", "uninstall"):
         command = subparsers.add_parser(name)
         command.add_argument("--install-directory", type=Path,
-            default=Path(os.environ.get("LOCALAPPDATA", str(Path.home()))) / "Programs" / "3SD")
+            default=Path(os.environ.get("LOCALAPPDATA", str(Path.home()))) / "Programs" / "DiyaProyect")
     startup = subparsers.add_parser("startup")
     startup.add_argument("action", choices=("enable", "disable", "status"))
     return parser
@@ -76,7 +76,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.command in ("install", "uninstall"):
         from cartridge_launcher.infrastructure.standalone_install import install, uninstall
         if not getattr(sys, "frozen", False):
-            raise ValueError("Usa estos comandos desde el paquete autonomo 3SD.exe.")
+            raise ValueError("Usa estos comandos desde el paquete autonomo DiyaProyect.exe.")
         if args.command == "install":
             install(args.install_directory, Path(sys.executable).parent)
         else:
@@ -87,7 +87,7 @@ def main(argv: list[str] | None = None) -> int:
     command = args.command or defaultCommand()
     lock: SingleInstanceLock | None = None
     if requiresSingleInstance(command, args):
-        lock = SingleInstanceLock(defaultDataDirectory() / "3sd.lock")
+        lock = SingleInstanceLock(defaultDataDirectory() / "diya_proyect.lock")
         if not lock.acquire():
             if command != "tray" or args.open_window:
                 SingleInstanceSignal().signalExisting()
@@ -140,5 +140,5 @@ if __name__ == "__main__":
     try:
         raise SystemExit(main())
     except Exception:
-        configureLogging(defaultDataDirectory() / "launcher.log").exception("No se pudo iniciar 3SD")
+        configureLogging(defaultDataDirectory() / "launcher.log").exception("No se pudo iniciar Diya Proyect")
         raise

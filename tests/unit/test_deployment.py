@@ -21,7 +21,7 @@ def installation(tmp_path):
     runtime = root / 'runtimes' / 'candidate'
     (runtime / 'Scripts').mkdir(parents=True)
     (runtime / 'Scripts' / 'pythonw.exe').touch()
-    paths = tuple(tmp_path / folder / '3SD.lnk' for folder in ('desktop', 'menu', 'startup'))
+    paths = tuple(tmp_path / folder / 'DiyaProyect.lnk' for folder in ('desktop', 'menu', 'startup'))
     return root, runtime, paths
 
 
@@ -68,7 +68,7 @@ def test_failed_publication_restores_old_shortcuts_and_manifest(installation, tm
             deployment.publish(root, runtime, tmp_path)
     assert json.loads((root / 'installation.json').read_text()) == old
     assert all(path.read_bytes() == b'old shortcut' for path in paths)
-    assert not (root / 'Abrir-3SD.bat').exists()
+    assert not (root / 'Abrir-Diya-Proyect.bat').exists()
 
 
 def test_runtime_outside_installation_rejected(installation, tmp_path):

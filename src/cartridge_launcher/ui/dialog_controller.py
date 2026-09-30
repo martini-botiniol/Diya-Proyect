@@ -3,7 +3,7 @@ from __future__ import annotations
 
 
 class OperationWindowGate:
-    NAME = "Local\\3SDOperationDialog"
+    NAME = "Local\\Diya ProyectOperationDialog"
 
     def __init__(self):
         self.handle = None

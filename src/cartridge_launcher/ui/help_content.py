@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-helpTitle = "Ayuda de 3SD"
-helpText = """3SD convierte un SSD extraible en un cartucho fisico para Steam.
+helpTitle = "Ayuda de Diya Proyect"
+helpText = """Diya Proyect convierte un SSD extraible en un cartucho fisico para Steam.
 
 Flujo recomendado
 
@@ -10,7 +10,7 @@ Flujo recomendado
 3. Abre "Opciones de cartucho" y elige Crear o Actualizar cartucho.
 4. En la ventana, selecciona primero el SSD y después el juego: busca por nombre o escribe nombre y AppID.
 5. Confirma la operación. Cada formulario comienza sin disco ni juego seleccionados.
-6. En modo automático, conecta el cartucho y 3SD solicita abrir o instalar en Steam.
+6. En modo automático, conecta el cartucho y Diya Proyect solicita abrir o instalar en Steam.
 7. Para corregir metadata, abre Reparar cartucho > Reparar y confirma dentro del formulario.
 8. Para un cartucho antiguo, abre Reparar cartucho > Preparar para usar en cualquier PC. Conserva el juego y un respaldo.
 
@@ -42,6 +42,10 @@ La biblioteca muestra los cartuchos registrados en esta PC. Si seleccionas una
 portada, puedes ver detalles. Abrir o instalar requiere que ese mismo SSD este
 insertado y validado.
 
+Cada tarjeta tiene un boton Eliminar cartucho. Quita el registro de esta PC,
+incluso si ya no tienes el SSD. Conserva los archivos del disco y la instalacion
+de Steam. Si vuelves a conectar ese cartucho, Diya Proyect puede registrarlo de nuevo.
+
 Steam
 
 La primera vez en cada PC, añade SteamLibrary del SSD en Steam > Parametros > Almacenamiento si se solicita.
@@ -54,7 +58,7 @@ instalado; si no, manda la orden de instalacion.
 
 Tray e inicio con Windows
 
-El modo tray mantiene 3SD residente para detectar inserciones de
+El modo tray mantiene Diya Proyect residente para detectar inserciones de
 SSD. Si activas "Iniciar con Windows", la app arranca en tray al iniciar sesion.
 Al abrir el acceso del escritorio o menu inicio, se muestra la biblioteca y el
 tray queda activo.

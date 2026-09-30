@@ -44,7 +44,7 @@ htmlcov/
 /build/
 *.egg-info/
 
-# 3SD local/generated files
+# Legacy-compatible local/generated data
 .3sd/
 *.spec
 

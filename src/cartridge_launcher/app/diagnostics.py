@@ -15,21 +15,21 @@ def check() -> None:
     from cartridge_launcher.ui.tray_app import createTrayIcon
 
     print(f"Python: {sys.executable} ({sys.version.split()[0]})")
-    for package in ("3sd", "Pillow", "pystray", "pywin32", "six"):
+    for package in ("diya_proyect", "Pillow", "pystray", "pywin32", "six"):
         print(f"{package}: {version(package)}")
     root = tk.Tk()
     root.withdraw()
     root.update()
     root.destroy()
     win32com.client.Dispatch("WScript.Shell")
-    icon = pystray.Icon("3sd-diagnostic", createTrayIcon())
+    icon = pystray.Icon("diya_proyect-diagnostic", createTrayIcon())
     assert icon is not None and buildParser() is not None
     print("Tkinter, bandeja e integracion Windows: OK")
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--run", action="store_true", help="Abrir 3SD conservando la consola")
+    parser.add_argument("--run", action="store_true", help="Abrir Diya Proyect conservando la consola")
     args = parser.parse_args()
     check()
     if args.run:

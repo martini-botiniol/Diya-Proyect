@@ -7,7 +7,7 @@ ERROR_ALREADY_EXISTS = 183
 
 
 class SingleInstanceLock:
-    def __init__(self, path: Path, mutexName: str = "Local\\3SDSingleInstance"):
+    def __init__(self, path: Path, mutexName: str = "Local\\Diya ProyectSingleInstance"):
         self.path = path
         self.acquired = False
         self.mutexName = mutexName

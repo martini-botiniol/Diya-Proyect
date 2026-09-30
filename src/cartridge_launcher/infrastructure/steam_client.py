@@ -28,7 +28,7 @@ class SteamClient:
             # Probe the actual Steam directory, not the cartridge metadata folder.
             # A unique temporary file never overwrites game or Steam files.
             with tempfile.TemporaryFile(prefix=".3sd-write-", dir=steamapps) as probe:
-                probe.write(b"3SD")
+                probe.write(b"DiyaProyect")
                 probe.flush()
                 os.fsync(probe.fileno())
         except OSError as exc:

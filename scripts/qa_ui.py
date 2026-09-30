@@ -21,7 +21,7 @@ from cartridge_launcher.ui.main_window import LauncherWindow
 
 
 def main():
-    with tempfile.TemporaryDirectory(prefix="3sd-ui-") as directory:
+    with tempfile.TemporaryDirectory(prefix="diya_proyect-ui-") as directory:
         base = Path(directory)
         disk = base / "ssd"
         disk.mkdir()
